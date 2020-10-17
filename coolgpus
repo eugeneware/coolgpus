@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 import os
 import re
 import time
@@ -108,7 +108,7 @@ def decimalize(bus):
     return ':'.join([str(int('0x' + p, 16)) for p in re.split('[:.]', bus[9:])])
 
 def gpu_buses():
-    return log_output(['nvidia-smi', '--format=csv,noheader', '--query-gpu=pci.bus_id', '-i', '2']).splitlines()
+    return log_output(['nvidia-smi', '--format=csv,noheader', '--query-gpu=pci.bus_id', '-i', '0,1']).splitlines()
 
 def query(bus, field):
     [line] = log_output(['nvidia-smi', '--format=csv,noheader', '--query-gpu='+field, '-i', bus]).splitlines()
